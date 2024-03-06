@@ -1,5 +1,6 @@
 import 'package:cat_long_live/src/service/theme_service.dart';
 import 'package:cat_long_live/theme/component/asset_icon.dart';
+import 'package:cat_long_live/theme/component/button/button.dart';
 import 'package:flutter/material.dart';
 
 class InputField extends StatefulWidget {
@@ -11,10 +12,12 @@ class InputField extends StatefulWidget {
     this.onChanged,
     this.onSubmitted,
     this.onClear,
-  });
+    bool? isClear,
+  }) : isClear = isClear ?? false;
 
   final String? hint; // 아무것도 입력하지 않았을 때
   final String? icon; // 아이콘을 함께 포함하고 싶을 때
+  final bool isClear;
   final TextEditingController? controller; // 입력
   final void Function(String text)? onChanged; // 입력을 할 때마다 호출
   final void Function(String text)? onSubmitted; // 입력 완료 후 제출 버튼 호출
@@ -35,7 +38,10 @@ class _InputFieldState extends State<InputField> {
       controller: controller,
 
       // changed text
-      onChanged: widget.onChanged,
+      onChanged: (value) {
+        setState(() {});
+        widget.onChanged?.call(value);
+      },
 
       // text style
       style: context.typo.headline5,
@@ -72,9 +78,19 @@ class _InputFieldState extends State<InputField> {
         ),
 
         // delete button
-        // suffixIcon: controller.text.isEmpty
-        //   ? null
-        //     : const AssetIcon('material-clear')
+        suffixIcon: controller.text.isNotEmpty && widget.isClear == true
+            ? Button(
+                icon: "material-clear",
+                type: ButtonType.flat,
+                color: context.color.text,
+                onPressed: () {
+                  setState(() {
+                    controller.clear();
+                    widget.onClear?.call();
+                  });
+                },
+              )
+            : null,
       ),
     );
   }

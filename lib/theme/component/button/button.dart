@@ -3,7 +3,6 @@ import 'package:cat_long_live/theme/component/asset_icon.dart';
 import 'package:flutter/material.dart';
 
 part "button_size.dart";
-
 part "button_type.dart";
 
 class Button extends StatefulWidget {
@@ -82,29 +81,54 @@ class _ButtonState extends State<Button> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        /// Icon
-        if (widget.icon != null)
-          AssetIcon(
-            widget.icon!,
-            color: color,
-          ),
+    return GestureDetector(
+      /// Click Event
+      onTapUp: (details) {
+        onPressed(false);
+        if (!widget.isInactive) {
+          widget.onPressed();
+        }
+      },
+      onTapDown: (details) => onPressed(true),
+      onTapCancel: () => onPressed(false),
 
-        /// Gap
-        if (widget.icon != null && widget.text != null)
-          const SizedBox(width: 6),
+      /// Container
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 100),
+        width: widget.width,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(8),
+          border: border,
+        ),
+        padding: EdgeInsets.all(widget.size.padding),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            /// Icon
+            if (widget.icon != null)
+              AssetIcon(
+                widget.icon!,
+                color: color,
+              ),
 
-        /// Text
-        if (widget.text != null)
-          Text(
-            widget.text!,
-            style: widget.size.getTextStyle(context).copyWith(
-              color: color,
-              fontWeight: context.typo.bold
-            ),
-          ),
-      ],
+            /// Gap
+            if (widget.icon != null && widget.text != null)
+              const SizedBox(width: 8),
+
+            /// Text
+            if (widget.text != null)
+              Text(
+                widget.text!,
+                style: widget.size.getTextStyle(context).copyWith(
+                  color: color,
+                  fontWeight: context.typo.bold,
+                ),
+              ),
+          ],
+        ),
+      ),
     );
   }
 }
