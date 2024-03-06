@@ -4,12 +4,12 @@ abstract class Typo {
   const Typo({
     required this.name,
     required this.regular,
-    required this.semiBold,
+    required this.bold,
   });
 
   final String name;
   final FontWeight regular;
-  final FontWeight semiBold;
+  final FontWeight bold;
 }
 
 class Catamaran implements Typo {
@@ -22,5 +22,5 @@ class Catamaran implements Typo {
   final FontWeight regular = FontWeight.w400;
 
   @override
-  final FontWeight semiBold = FontWeight.w600;
+  final FontWeight bold = FontWeight.w700;
 }
