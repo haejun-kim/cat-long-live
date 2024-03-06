@@ -27,7 +27,6 @@ class InputField extends StatefulWidget {
   State<InputField> createState() => _InputFieldState();
 }
 
-// TODO: onChanged, suffix delete button state에 따른 로직 구현 필요
 class _InputFieldState extends State<InputField> {
   late final TextEditingController controller =
       widget.controller ?? TextEditingController();
