@@ -1,4 +1,3 @@
-import 'package:cat_long_live/theme/component/appbar.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
 import 'package:cat_long_live/theme/component/button/kakao_button.dart';
 import 'package:cat_long_live/theme/component/hide_keyboard.dart';
