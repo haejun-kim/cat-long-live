@@ -13,14 +13,13 @@ class SignInView extends StatelessWidget {
   Widget build(BuildContext context) {
     return HideKeyboard(
       child: Scaffold(
-        appBar: const CustomAppBar(),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.07),
+                      top: MediaQuery.of(context).size.height * 0.16),
                   child: Text(
                     "Sign In",
                     style: context.theme.typo.headline1
