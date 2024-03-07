@@ -1,4 +1,3 @@
-import 'package:cat_long_live/theme/component/appbar.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
 import 'package:cat_long_live/theme/component/button/kakao_button.dart';
 import 'package:cat_long_live/theme/component/hide_keyboard.dart';
@@ -13,14 +12,13 @@ class SignInView extends StatelessWidget {
   Widget build(BuildContext context) {
     return HideKeyboard(
       child: Scaffold(
-        appBar: const CustomAppBar(),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.07),
+                      top: MediaQuery.of(context).size.height * 0.16),
                   child: Text(
                     "Sign In",
                     style: context.theme.typo.headline1
