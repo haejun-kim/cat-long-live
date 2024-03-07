@@ -1,3 +1,4 @@
+import 'package:cat_long_live/src/view/account/view/sign_up_view.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
 import 'package:cat_long_live/theme/component/button/kakao_button.dart';
 import 'package:cat_long_live/theme/component/hide_keyboard.dart';
@@ -22,8 +23,8 @@ class SignInView extends StatelessWidget {
                         top: MediaQuery.of(context).size.height * 0.16),
                     child: Text(
                       "Sign In",
-                      style: context.theme.typo.headline1
-                          .copyWith(fontWeight: context.typo.bold, fontSize: 32),
+                      style: context.theme.typo.headline1.copyWith(
+                          fontWeight: context.typo.bold, fontSize: 32),
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -93,7 +94,13 @@ class SignInView extends StatelessWidget {
                         width: 30,
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return const SignUpView();
+                            },
+                          ));
+                        },
                         child: Text(
                           "회원가입",
                           style: context.typo.body1.copyWith(
