@@ -1,5 +1,5 @@
 import 'package:cat_long_live/src/service/theme_service.dart';
-import 'package:cat_long_live/src/view/account/sign_in_view.dart';
+import 'package:cat_long_live/src/view/account/view/sign_in_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

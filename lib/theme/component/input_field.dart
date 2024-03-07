@@ -12,12 +12,14 @@ class InputField extends StatefulWidget {
     this.onChanged,
     this.onSubmitted,
     this.onClear,
+    this.labelText,
     bool? isClear,
   }) : isClear = isClear ?? false;
 
   final String? hint; // 아무것도 입력하지 않았을 때
   final String? icon; // 아이콘을 함께 포함하고 싶을 때
   final bool isClear;
+  final String? labelText;
   final TextEditingController? controller; // 입력
   final void Function(String text)? onChanged; // 입력을 할 때마다 호출
   final void Function(String text)? onSubmitted; // 입력 완료 후 제출 버튼 호출
@@ -33,63 +35,91 @@ class _InputFieldState extends State<InputField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 27),
+      child: TextFormField(
+        controller: controller,
 
-      // changed text
-      onChanged: (value) {
-        setState(() {});
-        widget.onChanged?.call(value);
-      },
+        // changed text
+        onChanged: (value) {
+          setState(() {});
+          widget.onChanged?.call(value);
+        },
 
-      // text style
-      style: context.typo.headline5,
+        // text style
+        style: context.typo.headline5,
 
-      // cursor color
-      cursorColor: context.color.primary,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        // cursor color
+        cursorColor: context.color.subtext,
 
-        // background color
-        filled: true,
-        fillColor: context.color.hintContainer,
+        decoration: InputDecoration(
+          // border
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
 
-        // hint style
-        hintStyle: context.typo.headline5.copyWith(
-          color: context.color.onHintContainer,
-        ),
-        hintText: widget.hint,
+          // focusBorder
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(
+              color: context.color.subtext,
+            ),
+          ),
 
-        // padding
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 12,
-          horizontal: 16,
-        ),
+          // label
+          labelText:
+              widget.labelText?.isNotEmpty == true ? widget.labelText : null,
 
-        // prefix icon
-        prefixIcon: Padding(
-          padding: const EdgeInsets.all(16),
-          child: widget.icon != null
-              ? AssetIcon(widget.icon!, color: context.color.onHintContainer)
+          // floating label
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          floatingLabelStyle: TextStyle(
+            color: context.color.text,
+            letterSpacing: 1.3,
+            fontWeight: FontWeight.bold,
+          ),
+
+          // background color
+          filled: true,
+          fillColor: context.color.hintContainer,
+
+          // hint style
+          hintStyle: context.typo.subtitle1.copyWith(
+            color: context.color.onHintContainer,
+          ),
+          hintText: widget.hint,
+
+          // padding
+          contentPadding: const EdgeInsets.symmetric(
+            vertical: 12,
+            horizontal: 16,
+          ),
+
+          // prefix icon
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(16),
+            child: widget.icon != null
+                ? AssetIcon(
+                    widget.icon!,
+                    color: context.color.onHintContainer,
+                  )
+                : null,
+          ),
+
+          // delete button
+          suffixIcon: controller.text.isNotEmpty && widget.isClear == true
+              ? Button(
+                  icon: "material-clear",
+                  type: ButtonType.flat,
+                  color: context.color.text,
+                  onPressed: () {
+                    setState(() {
+                      controller.clear();
+                      widget.onClear?.call();
+                    });
+                  },
+                )
               : null,
         ),
-
-        // delete button
-        suffixIcon: controller.text.isNotEmpty && widget.isClear == true
-            ? Button(
-                icon: "material-clear",
-                type: ButtonType.flat,
-                color: context.color.text,
-                onPressed: () {
-                  setState(() {
-                    controller.clear();
-                    widget.onClear?.call();
-                  });
-                },
-              )
-            : null,
       ),
     );
   }
