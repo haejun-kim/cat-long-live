@@ -49,7 +49,7 @@ class SignInView extends StatelessWidget {
                   labelText: "Password",
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 15,
                 ),
                 Align(
                   alignment: const Alignment(0.87, 0),
@@ -63,7 +63,7 @@ class SignInView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
                 Button(
                   onPressed: () {},
