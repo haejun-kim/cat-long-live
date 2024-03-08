@@ -1,6 +1,7 @@
 import 'package:cat_long_live/src/service/cat_service.dart';
 import 'package:cat_long_live/src/service/theme_service.dart';
 import 'package:cat_long_live/src/view/account/sign_in/sign_in_view.dart';
+import 'package:cat_long_live/src/view/home/cat/cat_view.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +33,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const SignInView(),
-      theme: context.themeService.themeData
+      theme: context.themeService.themeData,
+      routes: {
+        "/cats": (context) => CatView(),
+      },
     );
   }
 }

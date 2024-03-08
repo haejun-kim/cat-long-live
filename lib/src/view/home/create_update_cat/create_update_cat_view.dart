@@ -94,11 +94,11 @@ class _CreateAndUpdateCatViewState extends State<CreateAndUpdateCatView> {
                       Button(
                         text: "확인",
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) {
-                              return CatView();
-                            },
-                          ));
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            '/cats', // 이동하고자 하는 라우트 이름
+                            (route) => false, // 모든 이전 라우트를 제거하여 초기화
+                          );
                         },
                       ),
                     ],
