@@ -1,7 +1,8 @@
 import 'package:cat_long_live/src/service/theme_service.dart';
 import 'package:cat_long_live/src/view/base_view.dart';
 import 'package:cat_long_live/src/view/home/cat/cat_view_model.dart';
-import 'package:cat_long_live/src/view/home/widget/cat_list.dart';
+import 'package:cat_long_live/src/view/home/cat/widget/cat_list.dart';
+import 'package:cat_long_live/src/view/home/create_update_cat/create_update_cat_view.dart';
 import 'package:cat_long_live/theme/component/appbar.dart';
 import 'package:cat_long_live/theme/component/bottom_nav_bar.dart';
 import 'package:cat_long_live/theme/component/floating_action_button.dart';
@@ -50,7 +51,15 @@ class CatView extends StatelessWidget {
             ],
           ),
         ),
-        floatingActionButton: const CustomFloatingActionButton(),
+        floatingActionButton: CustomFloatingActionButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) {
+                return const CreateAndUpdateCatView();
+              },
+            ));
+          },
+        ),
         bottomNavigationBar: const BottomNavBar(),
       ),
     );

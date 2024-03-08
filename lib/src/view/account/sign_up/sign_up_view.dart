@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
 
+  final double paddingSize = 27.0;
+
   @override
   Widget build(BuildContext context) {
     return HideKeyboard(
@@ -43,19 +45,22 @@ class SignUpView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 55),
-                  const InputField(
+                  InputField(
                     hint: "email@example.com",
                     icon: "material-mail",
+                    horizontalPaddingSize: paddingSize,
                   ),
                   const SizedBox(height: 24),
-                  const InputField(
+                  InputField(
                     hint: "password",
                     icon: "material-lock",
+                    horizontalPaddingSize: paddingSize,
                   ),
                   const SizedBox(height: 24),
-                  const InputField(
+                  InputField(
                     hint: "password",
                     icon: "material-lock",
+                    horizontalPaddingSize: paddingSize,
                   ),
                   const SizedBox(height: 70),
                   Button(

@@ -1,4 +1,4 @@
-import 'package:cat_long_live/src/view/account/view/sign_up_view.dart';
+import 'package:cat_long_live/src/view/account/sign_up/sign_up_view.dart';
 import 'package:cat_long_live/src/view/home/cat/cat_view.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
 import 'package:cat_long_live/theme/component/kakao_button.dart';
@@ -9,6 +9,8 @@ import 'package:cat_long_live/src/service/theme_service.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
+
+  final double paddingSize = 27.0;
 
   @override
   Widget build(BuildContext context) {
@@ -36,18 +38,20 @@ class SignInView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 50),
-                  const InputField(
+                  InputField(
                     hint: "이메일을 입력해주세요.",
                     icon: "material-mail",
                     labelText: "Email",
+                    horizontalPaddingSize: paddingSize,
                   ),
                   const SizedBox(
                     height: 30,
                   ),
-                  const InputField(
+                  InputField(
                     hint: "비밀번호를 입력해주세요.",
                     icon: "material-lock",
                     labelText: "Password",
+                    horizontalPaddingSize: paddingSize,
                   ),
                   const SizedBox(
                     height: 15,
