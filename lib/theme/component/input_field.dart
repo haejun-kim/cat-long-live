@@ -14,12 +14,15 @@ class InputField extends StatefulWidget {
     this.onClear,
     this.labelText,
     bool? isClear,
-  }) : isClear = isClear ?? false;
+    double? horizontalPaddingSize,
+  })  : isClear = isClear ?? false,
+        horizontalPaddingSize = horizontalPaddingSize ?? 0;
 
   final String? hint; // 아무것도 입력하지 않았을 때
   final String? icon; // 아이콘을 함께 포함하고 싶을 때
   final bool isClear;
   final String? labelText;
+  final double? horizontalPaddingSize;
   final TextEditingController? controller; // 입력
   final void Function(String text)? onChanged; // 입력을 할 때마다 호출
   final void Function(String text)? onSubmitted; // 입력 완료 후 제출 버튼 호출
@@ -36,7 +39,7 @@ class _InputFieldState extends State<InputField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 27),
+      padding: EdgeInsets.symmetric(horizontal: widget.horizontalPaddingSize!),
       child: TextFormField(
         controller: controller,
 
@@ -71,7 +74,7 @@ class _InputFieldState extends State<InputField> {
               widget.labelText?.isNotEmpty == true ? widget.labelText : null,
 
           // floating label
-          floatingLabelBehavior: FloatingLabelBehavior.always,
+          // floatingLabelBehavior: FloatingLabelBehavior.always,
           floatingLabelStyle: TextStyle(
             color: context.color.text,
             letterSpacing: 1.3,
@@ -95,15 +98,15 @@ class _InputFieldState extends State<InputField> {
           ),
 
           // prefix icon
-          prefixIcon: Padding(
-            padding: const EdgeInsets.all(16),
-            child: widget.icon != null
-                ? AssetIcon(
+          prefixIcon: widget.icon != null
+              ? Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: AssetIcon(
                     widget.icon!,
                     color: context.color.onHintContainer,
-                  )
-                : null,
-          ),
+                  ),
+                )
+              : null,
 
           // delete button
           suffixIcon: controller.text.isNotEmpty && widget.isClear == true

@@ -1,3 +1,4 @@
+import 'package:cat_long_live/src/service/theme_service.dart';
 import 'package:cat_long_live/theme/component/asset_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       children: [
         Expanded(
           child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
             centerTitle: true,
             title: const Text(
               title,
@@ -22,9 +25,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 padding: const EdgeInsets.only(right: 10),
                 child: IconButton(
                   onPressed: () {},
-                  icon: const AssetIcon(
+                  icon: AssetIcon(
                     accountIcon,
                     size: 35,
+                    color: context.color.primary,
                   ),
                 ),
               ),
