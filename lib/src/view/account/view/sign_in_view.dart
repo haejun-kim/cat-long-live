@@ -1,6 +1,7 @@
 import 'package:cat_long_live/src/view/account/view/sign_up_view.dart';
+import 'package:cat_long_live/src/view/home/cat/cat_view.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
-import 'package:cat_long_live/theme/component/button/kakao_button.dart';
+import 'package:cat_long_live/theme/component/kakao_button.dart';
 import 'package:cat_long_live/theme/component/hide_keyboard.dart';
 import 'package:cat_long_live/theme/component/input_field.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,13 @@ class SignInView extends StatelessWidget {
                     height: 20,
                   ),
                   Button(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return CatView();
+                        },
+                      ));
+                    },
                     text: "로그인",
                     width: 183,
                   ),
