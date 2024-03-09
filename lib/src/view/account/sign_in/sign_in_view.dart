@@ -1,5 +1,5 @@
 import 'package:cat_long_live/src/view/account/sign_up/sign_up_view.dart';
-import 'package:cat_long_live/src/view/home/cat/cat_view.dart';
+import 'package:cat_long_live/src/view/home/home_view.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
 import 'package:cat_long_live/theme/component/kakao_button.dart';
 import 'package:cat_long_live/theme/component/hide_keyboard.dart';
@@ -7,9 +7,14 @@ import 'package:cat_long_live/theme/component/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:cat_long_live/src/service/theme_service.dart';
 
-class SignInView extends StatelessWidget {
+class SignInView extends StatefulWidget {
   const SignInView({super.key});
 
+  @override
+  State<SignInView> createState() => _SignInViewState();
+}
+
+class _SignInViewState extends State<SignInView> {
   final double paddingSize = 27.0;
 
   @override
@@ -72,11 +77,12 @@ class SignInView extends StatelessWidget {
                   ),
                   Button(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return CatView();
-                        },
-                      ));
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePageView()),
+                              (route) => false
+                      );
                     },
                     text: "로그인",
                     width: 183,
