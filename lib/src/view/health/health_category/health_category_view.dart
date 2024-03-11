@@ -1,8 +1,10 @@
 import 'package:cat_long_live/src/service/health_service.dart';
+import 'package:cat_long_live/src/service/theme_service.dart';
 import 'package:cat_long_live/src/view/base_view.dart';
 import 'package:cat_long_live/src/view/health/health_category/health_category_view_model.dart';
 import 'package:cat_long_live/src/view/health/health_category/widget/health_category_list.dart';
 import 'package:cat_long_live/theme/component/appbar.dart';
+import 'package:cat_long_live/theme/component/base_dialog.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
 import 'package:cat_long_live/theme/component/day_of_week.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +40,31 @@ class _HealthCategoryViewState extends State<HealthCategoryView> {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Button(
                       text: "신규 등록",
-                      onPressed: () {},
+                      onPressed: () async {
+                        // BuildContext를 가져와 BaseDialog 호출
+                        await BaseDialog(
+                          title: "카테고리 등록",
+                          isInputField: true,
+                          actions: [
+                            Button(
+                              text: "취소",
+                              type: ButtonType.outline,
+                              onPressed: () {
+                                /// TODO: HealthCategory Item List에 추가되고
+                                /// 화면 rebuild 되도록 구현 필요
+                                Navigator.pop(context);
+                              },
+                            ),
+                            const SizedBox(width: 1,),
+                            Button(
+                              text: "생성",
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        ).showMyDialog(context);
+                      },
                     ),
                   )
                 ],
