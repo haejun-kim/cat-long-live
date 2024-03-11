@@ -1,4 +1,6 @@
+import 'package:cat_long_live/src/repository/health_repository.dart';
 import 'package:cat_long_live/src/service/cat_service.dart';
+import 'package:cat_long_live/src/service/health_service.dart';
 import 'package:cat_long_live/src/service/theme_service.dart';
 import 'package:cat_long_live/src/view/account/sign_in/sign_in_view.dart';
 import 'package:flutter/material.dart';
@@ -12,11 +14,17 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        Provider(create: (context) => HealthRepository()),
         ChangeNotifierProvider(
           create: (context) => ThemeService(),
         ),
         ChangeNotifierProvider(
           create: (context) => CatService(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HealthService(
+            healthRepository: context.read<HealthRepository>(),
+          ),
         ),
       ],
       child: const MyApp(),

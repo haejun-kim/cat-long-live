@@ -1,9 +1,9 @@
 import 'package:cat_long_live/src/view/base_view.dart';
-import 'package:cat_long_live/src/view/health/health_view_model.dart';
-import 'package:cat_long_live/src/view/health/widget/health_list_tile.dart';
+import 'package:cat_long_live/src/view/health/health/health_view_model.dart';
+import 'package:cat_long_live/src/view/health/health/widget/health_list_tile.dart';
+import 'package:cat_long_live/src/view/health/health_category/health_category_view.dart';
 import 'package:cat_long_live/theme/component/appbar.dart';
 import 'package:cat_long_live/theme/component/day_of_week.dart';
-import 'package:cat_long_live/theme/component/floating_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,17 +26,25 @@ class HealthView extends StatelessWidget {
                   itemCount: viewModel.catImageList.length,
                   itemBuilder: (context, index) {
                     final cat = viewModel.catImageList[index];
-                    return HealthListTile(cat: cat);
+                    return HealthListTile(
+                      cat: cat,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const HealthCategoryView();
+                            },
+                          ),
+                        );
+                      },
+                    );
                   },
                 ),
               )
             ],
           ),
         ),
-        floatingActionButton: CustomFloatingActionButton(
-          onPressed: () {},
-        ),
-        // bottomNavigationBar: BottomNavBar(),
       ),
     );
   }
