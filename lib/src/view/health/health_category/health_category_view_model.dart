@@ -23,4 +23,12 @@ class HealthCategoryViewModel extends BaseViewModel {
   void onAddToHealthCategory(String newHealthCategory) {
     healthService.addHealthCategory(newHealthCategory);
   }
+
+  void onUpdateToHealthCategory(int index, String updateHealthCategory) {
+    healthService.updateHealthCategory(index, updateHealthCategory);
+  }
+
+  void onDeleteToHealthCategory(String deleteHealthCategory) {
+    healthService.deleteHealthCategory(deleteHealthCategory);
+  }
 }

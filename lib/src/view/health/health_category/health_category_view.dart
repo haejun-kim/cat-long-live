@@ -43,7 +43,6 @@ class _HealthCategoryViewState extends State<HealthCategoryView> {
                           title: "카테고리 등록",
                           inputField: InputField(
                             controller: viewModel.textController,
-                            // onClear: ,
                           ),
                           actions: [
                             Button(
@@ -86,8 +85,26 @@ class _HealthCategoryViewState extends State<HealthCategoryView> {
                   itemCount: viewModel.healthCategoryItem.length,
                   itemBuilder: (context, index) {
                     final healthCategory = viewModel.healthCategoryItem[index];
-                    return HealthCategoryList(
-                      healthCategory: healthCategory,
+                    return Dismissible(
+                      key: Key(healthCategory),
+                      onDismissed: (direction) {
+                        // Remove the healthCategory from the data source.
+                        setState(() {
+                          viewModel.onDeleteToHealthCategory(healthCategory);
+                        });
+
+                        // Then show a snackbar.
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('$healthCategory dismissed')));
+                      },
+
+                      // Show a red background as the item is swiped away.
+                      background: Container(color: Colors.red),
+                      child: HealthCategoryList(
+                        index: index,
+                        viewModel: viewModel,
+                        healthCategory: healthCategory,
+                      ),
                     );
                   },
                 ),

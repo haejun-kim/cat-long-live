@@ -1,14 +1,20 @@
 import 'package:cat_long_live/src/service/theme_service.dart';
+import 'package:cat_long_live/src/view/health/health_category/health_category_view_model.dart';
 import 'package:cat_long_live/theme/component/base_dialog.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
+import 'package:cat_long_live/theme/component/input_field.dart';
 import 'package:flutter/material.dart';
 
 class HealthCategoryList extends StatelessWidget {
   const HealthCategoryList({
     super.key,
+    required this.index,
     required this.healthCategory,
+    required this.viewModel,
   });
 
+  final int index;
+  final HealthCategoryViewModel viewModel;
   final String healthCategory;
 
   @override
@@ -19,70 +25,92 @@ class HealthCategoryList extends StatelessWidget {
         vertical: 10,
       ),
       child: GestureDetector(
-        /// on long press -> delete category
+        child: Container(
+          decoration: BoxDecoration(
+            color: context.color.primary.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Center(
+              child: Text(
+                healthCategory,
+                style: context.typo.subtitle1.copyWith(
+                  color: context.color.primary,
+                ),
+              ),
+            ),
+          ),
+        ),
+
+        /// delete category
+        // onLongPress: () async {
+        //   await _buildDeleteDialog(context).showMyDialog(context);
+        // },
+
+        /// update category
         onLongPress: () async {
-          // BuildContext를 가져와 BaseDialog 호출
-          await BaseDialog(
-            title: "카테고리 삭제",
-            actions: [
-              Button(
-                text: "취소",
-                type: ButtonType.outline,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              const SizedBox(
-                width: 1,
-              ),
-              Button(
-                text: "삭제",
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ).showMyDialog(context);
+          await _buildUpdateDialog(context).showMyDialog(context);
         },
+        // ),
+      ),
+    );
+  }
 
-        /// TODO: 버튼을 지우고 이렇게 생긴 Box를 직접 생성
-        /// health category view에서 ListView를 Gesture Detector로 감싸고
-        /// Longpress, press를 List View에서 관리하는 걸로 수정
-        /// base dialog 세부분이 생기니 extract widget으로 관리해볼것.
-        child: Button(
-          text: healthCategory,
-          color: context.color.primary,
-          type: ButtonType.flat,
-          size: ButtonSize.large,
-          backgroundColor: context.color.primary.withOpacity(0.1),
-
-          /// on pressed -> edit category
-          onPressed: () async {
-            // BuildContext를 가져와 BaseDialog 호출
-            await BaseDialog(
-              title: "카테고리 수정",
-              actions: [
-                Button(
-                  text: "취소",
-                  type: ButtonType.outline,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                const SizedBox(
-                  width: 1,
-                ),
-                Button(
-                  text: "수정",
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ).showMyDialog(context);
+  BaseDialog _buildDeleteDialog(BuildContext context) {
+    return BaseDialog(
+      title: "카테고리 삭제",
+      actions: [
+        Button(
+          text: "취소",
+          type: ButtonType.outline,
+          onPressed: () {
+            Navigator.pop(context);
           },
         ),
+        const SizedBox(
+          width: 1,
+        ),
+        Button(
+          text: "삭제",
+          onPressed: () {
+            viewModel.onDeleteToHealthCategory(healthCategory);
+            Navigator.pop(context);
+          },
+        ),
+      ],
+    );
+  }
+
+  BaseDialog _buildUpdateDialog(BuildContext context) {
+    return BaseDialog(
+      title: "카테고리 수정",
+      inputField: InputField(
+        controller: viewModel.textController,
       ),
+      actions: [
+        Button(
+          text: "취소",
+          type: ButtonType.outline,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        const SizedBox(
+          width: 1,
+        ),
+        Button(
+          text: "수정",
+          onPressed: () {
+            viewModel.onUpdateToHealthCategory(
+              index,
+              viewModel.textController.text,
+            );
+            viewModel.textController.clear();
+            Navigator.pop(context);
+          },
+        ),
+      ],
     );
   }
 }

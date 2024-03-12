@@ -20,4 +20,31 @@ class HealthService with ChangeNotifier {
     health = health.copyWith(healthCategoryItem: healthCategoryItemList);
     notifyListeners();
   }
+
+  void updateHealthCategory(int index, String updateHealthCategory) {
+    healthCategoryItemList = healthCategoryItemList;
+    healthCategoryItemList = List.unmodifiable(
+      List.from(
+        healthCategoryList
+            .asMap()
+            .entries
+            .map((e) => e.key == index ? updateHealthCategory : e.value),
+      ),
+    );
+    health = health.copyWith(healthCategoryItem: healthCategoryItemList);
+    notifyListeners();
+  }
+
+  void deleteHealthCategory(String deleteHealthCategory) {
+    healthCategoryItemList = healthCategoryItemList;
+    healthCategoryItemList = List.unmodifiable(
+      List.from(
+        healthCategoryItemList.where(
+          (healthCategoryItem) => deleteHealthCategory != healthCategoryItem,
+        ),
+      ),
+    );
+    health = health.copyWith(healthCategoryItem: healthCategoryItemList);
+    notifyListeners();
+  }
 }
