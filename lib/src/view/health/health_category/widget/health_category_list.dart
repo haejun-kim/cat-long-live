@@ -43,42 +43,12 @@ class HealthCategoryList extends StatelessWidget {
           ),
         ),
 
-        /// delete category
-        // onLongPress: () async {
-        //   await _buildDeleteDialog(context).showMyDialog(context);
-        // },
-
         /// update category
         onLongPress: () async {
           await _buildUpdateDialog(context).showMyDialog(context);
         },
         // ),
       ),
-    );
-  }
-
-  BaseDialog _buildDeleteDialog(BuildContext context) {
-    return BaseDialog(
-      title: "카테고리 삭제",
-      actions: [
-        Button(
-          text: "취소",
-          type: ButtonType.outline,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        const SizedBox(
-          width: 1,
-        ),
-        Button(
-          text: "삭제",
-          onPressed: () {
-            viewModel.onDeleteToHealthCategory(healthCategory);
-            Navigator.pop(context);
-          },
-        ),
-      ],
     );
   }
 
