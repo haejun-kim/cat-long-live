@@ -3,61 +3,64 @@ import 'package:cat_long_live/theme/component/asset_icon.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  const BottomNavBar({
+    super.key,
+    required this.currentIndex,
+    required this.pages,
+    required this.onDestinationSelected,
+  });
+
+  final int currentIndex;
+  final List<Widget> pages;
+  final void Function(int index) onDestinationSelected;
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      backgroundColor: context.color.surface,
-      selectedItemColor: context.color.primary,
-      currentIndex: _currentIndex,
-      onTap: (index) {
-        setState(() {
-          _currentIndex = index;
-        });
-      },
-      items: [
-        BottomNavigationBarItem(
-          icon: AssetIcon(
-            "material-home",
-            color: _currentIndex == 0
-                ? context.color.primary // 선택된 아이템의 아이콘 색상
-                : context.color.subtext,
+    return Scaffold(
+      body: widget.pages[widget.currentIndex],
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
+          labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
+            (Set<MaterialState> states) =>
+                states.contains(MaterialState.selected)
+                    ? TextStyle(color: context.color.primary)
+                    : TextStyle(color: context.color.subtext),
           ),
-          label: "홈",
         ),
-        BottomNavigationBarItem(
-          icon: AssetIcon(
-            "material-health-and-safety",
-            color: _currentIndex == 1
-                ? context.color.primary // 선택된 아이템의 아이콘 색상
-                : context.color.subtext,
-          ),
-          label: "건강",
+        child: NavigationBar(
+          height: MediaQuery.of(context).size.height * 0.07,
+          backgroundColor: context.color.surface,
+          indicatorColor: Colors.transparent,
+          selectedIndex: widget.currentIndex,
+          onDestinationSelected: widget.onDestinationSelected,
+          destinations: [
+            NavigationDestination(
+              selectedIcon:
+                  AssetIcon("material-home", color: context.color.primary),
+              icon: AssetIcon("material-home", color: context.color.subtext),
+              label: "홈",
+            ),
+            NavigationDestination(
+              selectedIcon: AssetIcon("material-health-and-safety",
+                  color: context.color.primary),
+              icon: AssetIcon("material-health-and-safety",
+                  color: context.color.subtext),
+              label: "건강",
+            ),
+            NavigationDestination(
+              selectedIcon: AssetIcon("material-library-books",
+                  color: context.color.primary),
+              icon: AssetIcon("material-library-books",
+                  color: context.color.subtext),
+              label: "다이어리",
+            ),
+          ],
         ),
-        BottomNavigationBarItem(
-          icon: AssetIcon(
-            "material-library-books",
-            color: _currentIndex == 2
-                ? context.color.primary // 선택된 아이템의 아이콘 색상
-                : context.color.subtext,
-          ),
-          label: "다이어리",
-        ),
-      ],
-      selectedIconTheme: IconThemeData(
-        color: context.color.primary, // 선택된 아이템의 아이콘 색상
-      ),
-      selectedLabelStyle: TextStyle(
-        fontWeight: context.typo.bold,
-        fontSize: 13,
       ),
     );
   }

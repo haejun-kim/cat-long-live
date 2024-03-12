@@ -1,7 +1,7 @@
 import 'package:cat_long_live/src/service/theme_service.dart';
-import 'package:cat_long_live/src/view/home/cat/cat_view.dart';
-import 'package:cat_long_live/src/view/home/create_update_cat/widget/image_upload.dart';
-import 'package:cat_long_live/src/view/home/create_update_cat/widget/select_gender.dart';
+import 'package:cat_long_live/src/view/cat/create_update_cat/widget/image_upload.dart';
+import 'package:cat_long_live/src/view/cat/create_update_cat/widget/select_gender.dart';
+import 'package:cat_long_live/src/view/home/home_view.dart';
 import 'package:cat_long_live/theme/component/appbar.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
 import 'package:cat_long_live/theme/component/date_picker.dart';
@@ -94,11 +94,18 @@ class _CreateAndUpdateCatViewState extends State<CreateAndUpdateCatView> {
                       Button(
                         text: "확인",
                         onPressed: () {
-                          Navigator.pushNamedAndRemoveUntil(
+                          Navigator.pushAndRemoveUntil(
                             context,
-                            '/cats', // 이동하고자 하는 라우트 이름
-                            (route) => false, // 모든 이전 라우트를 제거하여 초기화
+                            MaterialPageRoute(
+                              builder: (context) => const HomePageView(),
+                            ),
+                            (route) => false,
                           );
+                          // Navigator.pushNamedAndRemoveUntil(
+                          //   context,
+                          //   '/cats', // 이동하고자 하는 라우트 이름
+                          //   (route) => false, // 모든 이전 라우트를 제거하여 초기화
+                          // );
                         },
                       ),
                     ],
