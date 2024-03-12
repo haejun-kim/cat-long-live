@@ -6,11 +6,18 @@ class HealthService with ChangeNotifier {
   HealthService({required this.healthRepository})
       : health = healthRepository.healthList;
 
-  final Health health;
+  Health health;
   final HealthRepository healthRepository;
   List<String> healthCategoryItemList = const [];
 
-  List<String> get healthCategoryList {
-    return health.healthCategoryItem;
+  List<String> get healthCategoryList => health.healthCategoryItem;
+
+  void addHealthCategory(String newHealthCategory) {
+    healthCategoryItemList = healthCategoryList;
+    healthCategoryItemList = List.unmodifiable(
+      [...healthCategoryItemList, newHealthCategory],
+    );
+    health = health.copyWith(healthCategoryItem: healthCategoryItemList);
+    notifyListeners();
   }
 }

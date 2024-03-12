@@ -1,5 +1,4 @@
 import 'package:cat_long_live/src/service/theme_service.dart';
-import 'package:cat_long_live/theme/component/input_field.dart';
 import 'package:flutter/material.dart';
 
 class BaseDialog extends StatelessWidget {
@@ -8,12 +7,12 @@ class BaseDialog extends StatelessWidget {
     this.title,
     this.content,
     this.actions,
-    bool? isInputField,
-  }) : isInputField = isInputField ?? false;
+    this.inputField,
+  });
 
   final String? title;
   final String? content;
-  final bool isInputField;
+  final Widget? inputField;
   final List<Widget>? actions;
 
   Future<void> showMyDialog(BuildContext context) async {
@@ -37,11 +36,7 @@ class BaseDialog extends StatelessWidget {
                   ),
                 )
               : null,
-          content: isInputField
-              ? const InputField()
-              : content != null
-                  ? Text(content!)
-                  : null,
+          content: inputField ?? (content != null ? Text(content!) : null),
           actions: actions,
         );
       },

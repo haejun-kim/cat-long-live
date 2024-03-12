@@ -1,5 +1,6 @@
 import 'package:cat_long_live/src/service/health_service.dart';
 import 'package:cat_long_live/src/view/base_view_model.dart';
+import 'package:flutter/material.dart';
 
 class HealthCategoryViewModel extends BaseViewModel {
   HealthCategoryViewModel({
@@ -9,6 +10,7 @@ class HealthCategoryViewModel extends BaseViewModel {
   }
 
   final HealthService healthService;
+  final TextEditingController textController = TextEditingController();
 
   @override
   void dispose() {
@@ -17,4 +19,8 @@ class HealthCategoryViewModel extends BaseViewModel {
   }
 
   List<String> get healthCategoryItem => healthService.healthCategoryList;
+
+  void onAddToHealthCategory(String newHealthCategory) {
+    healthService.addHealthCategory(newHealthCategory);
+  }
 }
