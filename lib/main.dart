@@ -41,9 +41,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const SignInView(),
       theme: context.themeService.themeData,
-      routes: {
-        "/cats": (context) => CatView(),
-      },
     );
   }
 }
