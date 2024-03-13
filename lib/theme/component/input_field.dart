@@ -8,18 +8,26 @@ class InputField extends StatefulWidget {
     super.key,
     this.hint,
     this.icon,
+    this.minLine,
     this.controller,
     this.onChanged,
     this.onSubmitted,
     this.onClear,
     this.labelText,
+    int? maxLength,
+    int? maxLine,
     bool? isClear,
     double? horizontalPaddingSize,
-  })  : isClear = isClear ?? false,
+  })  : maxLength = maxLength ?? 15,
+        maxLine = maxLine ?? 1,
+        isClear = isClear ?? false,
         horizontalPaddingSize = horizontalPaddingSize ?? 0;
 
   final String? hint; // 아무것도 입력하지 않았을 때
   final String? icon; // 아이콘을 함께 포함하고 싶을 때
+  final int maxLength;
+  final int maxLine;
+  final int? minLine;
   final bool isClear;
   final String? labelText;
   final double? horizontalPaddingSize;
@@ -41,6 +49,10 @@ class _InputFieldState extends State<InputField> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: widget.horizontalPaddingSize!),
       child: TextFormField(
+        maxLength: widget.maxLength,
+        maxLines: widget.maxLine,
+        minLines: widget.minLine ?? widget.minLine,
+
         controller: controller,
 
         // changed text
