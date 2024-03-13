@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class CustomDropDown extends StatefulWidget {
   const CustomDropDown({
     super.key,
-    required this.healthCategory,
+    required this.items,
   });
 
-  final List<String> healthCategory;
+  final List<String> items;
 
   @override
   State<CustomDropDown> createState() => _CustomDropDownState();
@@ -30,17 +30,17 @@ class _CustomDropDownState extends State<CustomDropDown> {
         ),
       ),
 
-      /// TODO: 앞에서 선택한 healthCategory 값으로 initialSelection 변경 필요
+      /// TODO: 앞에서 선택한 items 값으로 initialSelection 변경 필요
       /// 여기서 변경후 저장하면 health category에서도 변경된 카테고리 글로 이동되어야 함.
-      initialSelection: widget.healthCategory.first,
+      initialSelection: widget.items.first,
       onSelected: (String? value) {
         // This is called when the user selects an item.
         setState(() {
-          widget.healthCategory.first != value!;
+          widget.items.first != value!;
         });
       },
       dropdownMenuEntries:
-          widget.healthCategory.map<DropdownMenuEntry<String>>((String value) {
+          widget.items.map<DropdownMenuEntry<String>>((String value) {
         return DropdownMenuEntry<String>(
           value: value,
           label: value,

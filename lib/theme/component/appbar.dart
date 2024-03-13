@@ -1,4 +1,5 @@
 import 'package:cat_long_live/src/service/theme_service.dart';
+import 'package:cat_long_live/src/view/home/home_view.dart';
 import 'package:cat_long_live/theme/component/asset_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +18,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             backgroundColor: Colors.transparent,
             elevation: 0.0,
             centerTitle: true,
-            title: Text(
-              title,
+            title: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomePageView(),
+                  ),
+                );
+              },
+              child: Text(
+                title,
+              ),
             ),
             actions: [
               Padding(

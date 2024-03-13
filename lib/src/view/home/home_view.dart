@@ -1,4 +1,5 @@
 import 'package:cat_long_live/src/view/cat/cats/cat_view.dart';
+import 'package:cat_long_live/src/view/diary/diary/diary_view.dart';
 import 'package:cat_long_live/src/view/health/health/health_view.dart';
 import 'package:cat_long_live/theme/component/bottom_nav_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,6 +18,7 @@ class _HomePageState extends State<HomePageView> {
   final _pages = const [
     CatView(),
     HealthView(),
+    DiaryView(),
   ];
 
   // 페이지 선택 시 호출되는 콜백 메서드

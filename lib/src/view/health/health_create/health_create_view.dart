@@ -7,8 +7,8 @@ import 'package:cat_long_live/theme/component/hide_keyboard.dart';
 import 'package:cat_long_live/theme/component/input_field.dart';
 import 'package:flutter/material.dart';
 
-class HealthDetailView extends StatelessWidget {
-  const HealthDetailView({super.key});
+class HealthCreateView extends StatelessWidget {
+  const HealthCreateView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class HealthDetailView extends StatelessWidget {
                 // mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Align(
+                  const Align(
                     alignment: Alignment.topLeft,
                     child: DatePicker(
                       type: ButtonType.outline,
@@ -37,13 +37,13 @@ class HealthDetailView extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       /// TODO: HealthCategory list값으로 변경 필요
                       Expanded(
                         child: CustomDropDown(
-                          healthCategory: ["진료 기록", "심장사상충 투여", "정기 건강 검진"],
+                         items: ["진료 기록", "심장사상충 투여", "정기 건강 검진"],
                         ),
                       ),
                       Expanded(
@@ -62,13 +62,13 @@ class HealthDetailView extends StatelessWidget {
                     style: context.typo.headline1
                         .copyWith(fontWeight: context.typo.bold),
                   ),
-                  InputField(),
+                  const InputField(),
                   Text(
                     "내용",
                     style: context.typo.headline1
                         .copyWith(fontWeight: context.typo.bold),
                   ),
-                  InputField(
+                  const InputField(
                     maxLength: 300,
                     maxLine: 7,
                   ),
