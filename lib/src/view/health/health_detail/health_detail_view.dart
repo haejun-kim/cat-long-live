@@ -43,7 +43,7 @@ class HealthDetailView extends StatelessWidget {
                       /// TODO: HealthCategory list값으로 변경 필요
                       Expanded(
                         child: CustomDropDown(
-                          healthCategory: ["진료 기록", "심장사상충 투여", "정기 건강 검진"],
+                          items: ["진료 기록", "심장사상충 투여", "정기 건강 검진"],
                         ),
                       ),
                       Expanded(
