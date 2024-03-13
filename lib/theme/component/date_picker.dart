@@ -3,7 +3,9 @@ import 'package:cat_long_live/theme/component/button/button.dart';
 import 'package:flutter/material.dart';
 
 class DatePicker extends StatefulWidget {
-  const DatePicker({super.key});
+  const DatePicker({super.key, this.type});
+
+  final ButtonType? type;
 
   @override
   State<DatePicker> createState() => _DatePickerState();
@@ -15,6 +17,7 @@ class _DatePickerState extends State<DatePicker> {
   @override
   Widget build(BuildContext context) {
     return Button(
+      type: widget.type,
       icon: "material-calendar",
       onPressed: () async {
         final selectedDate = await showDatePicker(

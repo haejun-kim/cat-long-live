@@ -3,9 +3,9 @@ import 'package:cat_long_live/theme/component/asset_icon.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({super.key, String? title}) : title = title ?? "냥수무강";
 
-  static const String title = "냥수무강";
+  final String title;
   static const String accountIcon = "material-account-circle";
 
   @override
@@ -17,7 +17,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             backgroundColor: Colors.transparent,
             elevation: 0.0,
             centerTitle: true,
-            title: const Text(
+            title: Text(
               title,
             ),
             actions: [

@@ -1,7 +1,7 @@
 import 'package:cat_long_live/src/service/health_service.dart';
 import 'package:cat_long_live/src/view/base_view.dart';
 import 'package:cat_long_live/src/view/health/health_category/health_category_view_model.dart';
-import 'package:cat_long_live/src/view/health/health_category/widget/health_category_list.dart';
+import 'package:cat_long_live/src/view/health/health_category/widget/health_category.dart';
 import 'package:cat_long_live/theme/component/appbar.dart';
 import 'package:cat_long_live/theme/component/base_dialog.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
@@ -100,7 +100,7 @@ class _HealthCategoryViewState extends State<HealthCategoryView> {
 
                       // Show a red background as the item is swiped away.
                       background: Container(color: Colors.red),
-                      child: HealthCategoryList(
+                      child: HealthCategory(
                         index: index,
                         viewModel: viewModel,
                         healthCategory: healthCategory,
