@@ -1,5 +1,6 @@
 import 'package:cat_long_live/src/service/theme_service.dart';
-import 'package:cat_long_live/theme/component/asset_icon.dart';
+import 'package:cat_long_live/src/view/health/health_detail/health_detail_view.dart';
+import 'package:cat_long_live/theme/component/base_dialog.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,8 @@ class HealthTitleCard extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -61,14 +63,23 @@ class HealthTitleCard extends StatelessWidget {
                       icon: "material-edit",
                       size: ButtonSize.small,
                       type: ButtonType.outline,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HealthDetailView(),
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(width: 15),
                     Button(
                       text: "삭제",
                       icon: "material-delete",
                       size: ButtonSize.small,
-                      onPressed: () {},
+                      onPressed: () async {
+                        await _buildDeleteDialog(context).showMyDialog(context);
+                      },
                     ),
                   ],
                 ),
@@ -77,6 +88,30 @@ class HealthTitleCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  BaseDialog _buildDeleteDialog(BuildContext context) {
+    return BaseDialog(
+      title: "정말 삭제하시겠습니까?",
+      actions: [
+        Button(
+          text: "취소",
+          type: ButtonType.outline,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        const SizedBox(
+          width: 1,
+        ),
+        Button(
+          text: "삭제",
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ],
     );
   }
 }

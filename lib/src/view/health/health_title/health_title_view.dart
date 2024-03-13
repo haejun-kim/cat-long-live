@@ -35,22 +35,19 @@ class HealthTitleView extends StatelessWidget {
               ),
 
               /// TODO: ListView builder로 변경
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HealthDetailView(),
-                    ),
-                  );
-                },
-                child: const HealthTitleCard(),
-              ),
+              const HealthTitleCard(),
             ],
           ),
         ),
       ),
-      floatingActionButton: CustomFloatingActionButton(onPressed: () {}),
+      floatingActionButton: CustomFloatingActionButton(onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HealthDetailView(),
+          ),
+        );
+      }),
     );
   }
 }

@@ -1,9 +1,8 @@
 import 'package:cat_long_live/src/service/theme_service.dart';
 import 'package:flutter/material.dart';
 
-class BaseDialog extends StatelessWidget {
+class BaseDialog {
   const BaseDialog({
-    super.key,
     this.title,
     this.content,
     this.actions,
@@ -40,16 +39,6 @@ class BaseDialog extends StatelessWidget {
           actions: actions,
         );
       },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () async {
-        await showMyDialog(context);
-      },
-      child: const Text('Show Dialog'),
     );
   }
 }
