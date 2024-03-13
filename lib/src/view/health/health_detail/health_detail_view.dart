@@ -28,7 +28,7 @@ class HealthDetailView extends StatelessWidget {
                 // mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Align(
+                  const Align(
                     alignment: Alignment.topLeft,
                     child: DatePicker(
                       type: ButtonType.outline,
@@ -37,7 +37,7 @@ class HealthDetailView extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       /// TODO: HealthCategory list값으로 변경 필요
@@ -62,13 +62,13 @@ class HealthDetailView extends StatelessWidget {
                     style: context.typo.headline1
                         .copyWith(fontWeight: context.typo.bold),
                   ),
-                  InputField(),
+                  const InputField(),
                   Text(
                     "내용",
                     style: context.typo.headline1
                         .copyWith(fontWeight: context.typo.bold),
                   ),
-                  InputField(
+                  const InputField(
                     maxLength: 300,
                     maxLine: 7,
                   ),
