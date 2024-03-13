@@ -1,5 +1,6 @@
 import 'package:cat_long_live/src/view/account/sign_up/sign_up_view.dart';
 import 'package:cat_long_live/src/view/home/home_view.dart';
+import 'package:cat_long_live/src/view/home/cat/cat_view.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
 import 'package:cat_long_live/theme/component/kakao_button.dart';
 import 'package:cat_long_live/theme/component/hide_keyboard.dart';
