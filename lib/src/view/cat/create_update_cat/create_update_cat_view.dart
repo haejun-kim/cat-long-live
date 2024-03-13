@@ -1,5 +1,5 @@
 import 'package:cat_long_live/src/service/theme_service.dart';
-import 'package:cat_long_live/src/view/cat/create_update_cat/widget/image_upload.dart';
+import 'package:cat_long_live/theme/component/image_upload.dart';
 import 'package:cat_long_live/src/view/cat/create_update_cat/widget/select_gender.dart';
 import 'package:cat_long_live/src/view/home/home_view.dart';
 import 'package:cat_long_live/theme/component/appbar.dart';
