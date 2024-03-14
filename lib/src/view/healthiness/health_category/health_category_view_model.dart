@@ -9,7 +9,7 @@ class HealthCategoryViewModel extends BaseViewModel {
     healthService.addListener(notifyListeners);
   }
 
-  final HealthService healthService;
+  final HealthinessService healthService;
   final TextEditingController textController = TextEditingController();
 
   @override

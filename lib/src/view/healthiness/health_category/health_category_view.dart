@@ -1,7 +1,7 @@
 import 'package:cat_long_live/src/service/health_service.dart';
 import 'package:cat_long_live/src/view/base_view.dart';
-import 'package:cat_long_live/src/view/health/health_category/health_category_view_model.dart';
-import 'package:cat_long_live/src/view/health/health_category/widget/health_category.dart';
+import 'package:cat_long_live/src/view/healthiness/health_category/health_category_view_model.dart';
+import 'package:cat_long_live/src/view/healthiness/health_category/widget/health_category.dart';
 import 'package:cat_long_live/theme/component/appbar.dart';
 import 'package:cat_long_live/theme/component/base_dialog.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
@@ -22,7 +22,7 @@ class _HealthCategoryViewState extends State<HealthCategoryView> {
   Widget build(BuildContext context) {
     return BaseView(
       viewModel: HealthCategoryViewModel(
-        healthService: context.read<HealthService>(),
+        healthService: context.read<HealthinessService>(),
       ),
       builder: (context, viewModel) => Scaffold(
         appBar: const CustomAppBar(),

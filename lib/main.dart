@@ -6,12 +6,19 @@ import 'package:cat_long_live/src/view/account/sign_in/sign_in_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:pocketbase/pocketbase.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
-  // intl 패키지 초기화
   await initializeDateFormatting();
   await dotenv.load(fileName: 'assets/config/.env');
+
+  final pb = PocketBase(dotenv.env["POCKETBASE_URL"]!);
+
+  await pb.admins.authWithPassword(
+    dotenv.env["POCKETBASE_ADMIN_USER"]!,
+    dotenv.env["POCKETBASE_ADMIN_PASSWORD"]!,
+  );
 
   runApp(
     MultiProvider(
@@ -24,7 +31,7 @@ void main() async {
           create: (context) => CatService(),
         ),
         ChangeNotifierProvider(
-          create: (context) => HealthService(
+          create: (context) => HealthinessService(
             healthRepository: context.read<HealthRepository>(),
           ),
         ),

@@ -1,5 +1,5 @@
 import 'package:cat_long_live/src/service/theme_service.dart';
-import 'package:cat_long_live/src/view/health/health_category/health_category_view_model.dart';
+import 'package:cat_long_live/src/view/healthiness/health_category/health_category_view_model.dart';
 import 'package:cat_long_live/theme/component/base_dialog.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
 import 'package:cat_long_live/theme/component/input_field.dart';
