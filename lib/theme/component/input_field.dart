@@ -15,17 +15,20 @@ class InputField extends StatefulWidget {
     this.onSubmitted,
     this.onClear,
     this.labelText,
+    bool? isObscure,
     int? maxLength,
     int? maxLine,
     bool? isClear,
     double? horizontalPaddingSize,
-  })  : maxLength = maxLength ?? 15,
+  })  : isObscure = isObscure ?? false,
+        maxLength = maxLength ?? 15,
         maxLine = maxLine ?? 1,
         isClear = isClear ?? false,
         horizontalPaddingSize = horizontalPaddingSize ?? 0;
 
   final String? hint; // 아무것도 입력하지 않았을 때
   final String? icon; // 아이콘을 함께 포함하고 싶을 때
+  final bool isObscure;
   final int maxLength;
   final int maxLine;
   final int? minLine;
@@ -51,6 +54,9 @@ class _InputFieldState extends State<InputField> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: widget.horizontalPaddingSize!),
       child: TextFormField(
+        // invisible text
+        obscureText: widget.isObscure,
+
         // validator
         validator: widget.validator,
         autovalidateMode: AutovalidateMode.onUserInteraction,

@@ -61,11 +61,12 @@ class _SignInViewState extends State<SignInView> {
                       labelText: "Email",
                       maxLength: 30,
                       horizontalPaddingSize: paddingSize,
+                      controller: viewModel.emailController,
                       validator: (value) => Validator.validateEmail(
                         viewModel.emailController.text,
                       ),
                       onChanged: (value) {
-                        viewModel.updateBody();
+                        viewModel.updateEmail(value);
                       },
                     ),
                     const SizedBox(
@@ -75,12 +76,14 @@ class _SignInViewState extends State<SignInView> {
                       hint: "비밀번호를 입력해주세요.",
                       icon: "material-lock",
                       labelText: "Password",
+                      isObscure: true,
                       horizontalPaddingSize: paddingSize,
+                      controller: viewModel.passwordController,
                       validator: (value) => Validator.validatePassword(
                         viewModel.passwordController.text,
                       ),
                       onChanged: (value) {
-                        viewModel.updateBody();
+                        viewModel.updatePassword(value);
                       },
                     ),
                     const SizedBox(
@@ -115,11 +118,14 @@ class _SignInViewState extends State<SignInView> {
                             ),
                             (route) => false,
                           );
-
-                          viewModel.emailController.clear();
-                          viewModel.passwordController.clear();
                         } catch (e) {
-                          ToastUtils.showToast("등록되지 않은 사용자입니다.");
+                          print(e);
+                          await ToastUtils.showToast("등록되지 않은 사용자입니다.");
+                        } finally {
+                          setState(() {
+                            viewModel.emailController.clear();
+                            viewModel.passwordController.clear();
+                          });
                         }
                       },
                       text: "로그인",

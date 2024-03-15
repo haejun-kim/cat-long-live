@@ -15,8 +15,11 @@ class SignInViewModel extends BaseViewModel {
   };
 
 
-  void updateBody() {
-    body["email"] = emailController.text;
-    body["password"] = passwordController.text;
+  void updateEmail(String email) {
+    body["email"] = email;
+  }
+
+  void updatePassword(String password) {
+    body["password"] = password;
   }
 }
