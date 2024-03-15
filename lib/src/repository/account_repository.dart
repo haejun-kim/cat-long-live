@@ -1,23 +1,9 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:pocketbase/pocketbase.dart';
-
-final pb = PocketBase(dotenv.env["POCKETBASE_URL"]!);
+import 'package:cat_long_live/src/service/pocketbase_service.dart';
 
 class AccountRepository {
-  Future<void> getAdminAuthorization() async {
-    await pb.admins.authWithPassword(
-      dotenv.env["POCKETBASE_ADMIN_USER"]!,
-      dotenv.env["POCKETBASE_ADMIN_PASSWORD"]!,
-    );
-  }
-
   Future<void> getUserList() async {
-    getAdminAuthorization();
     try {
-      final resultList = await pb.collection('users').getList(
-            page: 1,
-            perPage: 50,
-          );
+      final resultList = await pb.collection('users').getList();
 
       print('Result List: $resultList');
 
@@ -25,5 +11,10 @@ class AccountRepository {
     } catch (e) {
       print('Error fetching user list: $e');
     }
+  }
+
+  Future<void> createAccount(Map<String, dynamic> body) async {
+    final record = await pb.collection('users').create(body: body);
+    print(record);
   }
 }

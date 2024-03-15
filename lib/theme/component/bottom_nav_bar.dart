@@ -46,9 +46,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
               label: "홈",
             ),
             NavigationDestination(
-              selectedIcon: AssetIcon("material-healthiness-and-safety",
+              selectedIcon: AssetIcon("material-health-and-safety",
                   color: context.color.primary),
-              icon: AssetIcon("material-healthiness-and-safety",
+              icon: AssetIcon("material-health-and-safety",
                   color: context.color.subtext),
               label: "건강",
             ),
