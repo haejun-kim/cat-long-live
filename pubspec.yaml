@@ -45,6 +45,7 @@ dependencies:
   pocketbase: ^0.18.1
   flutter_dotenv: ^5.1.0
   fluttertoast: ^8.2.4
+  url_launcher: ^6.2.5
 
 dev_dependencies:
   flutter_test:
