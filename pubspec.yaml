@@ -44,6 +44,7 @@ dependencies:
   input_quantity: ^2.3.2
   pocketbase: ^0.18.1
   flutter_dotenv: ^5.1.0
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:
