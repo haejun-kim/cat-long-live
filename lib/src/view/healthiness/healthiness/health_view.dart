@@ -1,7 +1,7 @@
 import 'package:cat_long_live/src/view/base_view.dart';
-import 'package:cat_long_live/src/view/health/health/health_view_model.dart';
-import 'package:cat_long_live/src/view/health/health/widget/health_list_tile.dart';
-import 'package:cat_long_live/src/view/health/health_category/health_category_view.dart';
+import 'package:cat_long_live/src/view/healthiness/healthiness/health_view_model.dart';
+import 'package:cat_long_live/src/view/healthiness/healthiness/widget/health_list_tile.dart';
+import 'package:cat_long_live/src/view/healthiness/health_category/health_category_view.dart';
 import 'package:cat_long_live/theme/component/appbar.dart';
 import 'package:cat_long_live/theme/component/day_of_week.dart';
 import 'package:flutter/material.dart';

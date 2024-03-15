@@ -1,6 +1,7 @@
 import 'package:cat_long_live/src/repository/health_repository.dart';
 import 'package:cat_long_live/src/service/cat_service.dart';
 import 'package:cat_long_live/src/service/health_service.dart';
+import 'package:cat_long_live/src/service/pocketbase_service.dart';
 import 'package:cat_long_live/src/service/theme_service.dart';
 import 'package:cat_long_live/src/view/account/sign_in/sign_in_view.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,9 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
-  // intl 패키지 초기화
   await initializeDateFormatting();
   await dotenv.load(fileName: 'assets/config/.env');
+  await PocketBaseService().getAdminAuthorization();
 
   runApp(
     MultiProvider(
@@ -21,10 +22,13 @@ void main() async {
           create: (context) => ThemeService(),
         ),
         ChangeNotifierProvider(
+          create: (context) => PocketBaseService(),
+        ),
+        ChangeNotifierProvider(
           create: (context) => CatService(),
         ),
         ChangeNotifierProvider(
-          create: (context) => HealthService(
+          create: (context) => HealthinessService(
             healthRepository: context.read<HealthRepository>(),
           ),
         ),

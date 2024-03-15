@@ -1,6 +1,6 @@
 import 'package:cat_long_live/src/service/theme_service.dart';
-import 'package:cat_long_live/src/view/health/health_create/health_create_view.dart';
-import 'package:cat_long_live/src/view/health/health_title/widget/health_title_card.dart';
+import 'package:cat_long_live/src/view/healthiness/health_create/health_create_view.dart';
+import 'package:cat_long_live/src/view/healthiness/health_title/widget/health_title_card.dart';
 import 'package:cat_long_live/theme/component/appbar.dart';
 import 'package:cat_long_live/theme/component/floating_action_button.dart';
 import 'package:flutter/material.dart';
