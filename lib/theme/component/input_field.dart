@@ -10,6 +10,7 @@ class InputField extends StatefulWidget {
     this.icon,
     this.minLine,
     this.controller,
+    this.validator,
     this.onChanged,
     this.onSubmitted,
     this.onClear,
@@ -32,6 +33,7 @@ class InputField extends StatefulWidget {
   final String? labelText;
   final double? horizontalPaddingSize;
   final TextEditingController? controller; // 입력
+  final String? Function(String? field)? validator;
   final void Function(String text)? onChanged; // 입력을 할 때마다 호출
   final void Function(String text)? onSubmitted; // 입력 완료 후 제출 버튼 호출
   final void Function()? onClear; // 내용을 모두 지울 때 호출
@@ -49,10 +51,16 @@ class _InputFieldState extends State<InputField> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: widget.horizontalPaddingSize!),
       child: TextFormField(
+        // validator
+        validator: widget.validator,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+
+        // length, line
         maxLength: widget.maxLength,
         maxLines: widget.maxLine,
         minLines: widget.minLine ?? widget.minLine,
 
+        // controller
         controller: controller,
 
         // changed text
