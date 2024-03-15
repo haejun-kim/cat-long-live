@@ -2,7 +2,7 @@ class Validator {
   static String? validateEmail(String? email) {
     if (email == null || email.isEmpty) {
       return '이메일을 입력하세요.';
-    } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
+    } else if (!RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
       return '올바른 이메일 주소를 입력하세요.';
     }
     return null;
