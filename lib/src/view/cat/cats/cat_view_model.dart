@@ -15,5 +15,7 @@ class CatViewModel extends BaseViewModel {
     super.dispose();
   }
 
-  List<Cat> get catImageList => catService.catImages;
+  Future<List<Cat>?> get catItems async {
+    return await catService.cat;
+  }
 }

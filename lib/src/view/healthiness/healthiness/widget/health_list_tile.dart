@@ -42,7 +42,7 @@ class HealthListTile extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: Image.network(
-                      cat.imageUrl,
+                      cat.catImage!,
                       height: 100.0,
                       width: 100.0,
                       fit: BoxFit.fill,

@@ -23,9 +23,9 @@ class HealthView extends StatelessWidget {
               DayOfWeek(),
               Expanded(
                 child: ListView.builder(
-                  itemCount: viewModel.catImageList.length,
+                  itemCount: viewModel.catItems.length,
                   itemBuilder: (context, index) {
-                    final cat = viewModel.catImageList[index];
+                    final cat = viewModel.catItems[index];
                     return HealthListTile(
                       cat: cat,
                       onPressed: () {
