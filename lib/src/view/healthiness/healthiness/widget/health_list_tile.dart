@@ -1,6 +1,7 @@
 import 'package:cat_long_live/src/model/cat.dart';
 import 'package:cat_long_live/src/service/theme_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class HealthListTile extends StatelessWidget {
   const HealthListTile({
@@ -41,12 +42,22 @@ class HealthListTile extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(100),
-                    child: Image.network(
-                      cat.catImage!,
-                      height: 100.0,
-                      width: 100.0,
-                      fit: BoxFit.fill,
-                    ),
+                    child: cat.catImage != ""
+                        ? Image.network(
+                            "${dotenv.env["POCKETBASE_URL"]}"
+                            "${dotenv.env["IMAGE_DOWNLOAD_URL"]}${cat.id}/"
+                            "${cat.catImage}?thumb="
+                            "${dotenv.env["IMAGE_THUMBNAIL"]}",
+                            height: 100.0,
+                            width: 100.0,
+                            fit: BoxFit.fill,
+                          )
+                        : Image.asset(
+                            "assets/images/null_cat.jpeg",
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.fill,
+                          ),
                   ),
                   const SizedBox(
                     width: 20,

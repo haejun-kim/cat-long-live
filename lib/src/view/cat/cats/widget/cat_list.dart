@@ -3,9 +3,6 @@ import 'package:cat_long_live/src/service/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-String imageDownloadUrl = "${dotenv.env["POCKETBASE_URL"]}/api/files/cats/";
-String thumbnail = "100x250";
-
 class CatListView extends StatelessWidget {
   const CatListView({super.key, required this.cat});
 
@@ -26,7 +23,10 @@ class CatListView extends StatelessWidget {
         children: [
           cat.catImage != ""
               ? Image.network(
-                  "$imageDownloadUrl${cat.id}/${cat.catImage}?thumb=$thumbnail",
+                  "${dotenv.env["POCKETBASE_URL"]}"
+                      "${dotenv.env["IMAGE_DOWNLOAD_URL"]}${cat.id}/"
+                      "${cat.catImage}?thumb="
+                      "${dotenv.env["IMAGE_THUMBNAIL"]}",
                   width: double.infinity,
                   height: 250,
                   fit: BoxFit.cover,

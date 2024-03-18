@@ -1,5 +1,6 @@
 import 'package:cat_long_live/src/model/cat.dart';
 import 'package:cat_long_live/src/repository/cat_repository.dart';
+import 'package:cat_long_live/src/service/pocketbase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -26,7 +27,7 @@ class CatService with ChangeNotifier {
     String? imagePath = image?.path;
 
     Map<String, dynamic> catData = {
-      "userId": "0xz89rl6sa5xauv",
+      "userId": pb.authStore.model.id,
       "name": name,
       "birthday": birthday.toString(),
       "gender": gender,
