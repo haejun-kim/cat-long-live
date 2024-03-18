@@ -24,12 +24,21 @@ class CatListView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(
-            "$imageDownloadUrl${cat.id}/${cat.catImage}?thumb=$thumbnail",
-            width: double.infinity,
-            height: 250,
-            fit: BoxFit.cover,
-          ),
+          cat.catImage != ""
+              ? Image.network(
+                  "$imageDownloadUrl${cat.id}/${cat.catImage}?thumb=$thumbnail",
+                  width: double.infinity,
+                  height: 250,
+                  fit: BoxFit.cover,
+                )
+
+              /// 등록한 이미지가 없을 때
+              : Image.asset(
+                  "assets/images/null_cat.jpeg",
+                  width: double.infinity,
+                  height: 250,
+                  fit: BoxFit.cover,
+                ),
           const SizedBox(height: 8),
           Text(cat.name, style: context.typo.headline2),
           Text(_calculateDaysSinceBirthday(cat.birthday),

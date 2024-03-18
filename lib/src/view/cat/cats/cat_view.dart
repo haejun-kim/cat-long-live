@@ -9,11 +9,17 @@ import 'package:cat_long_live/theme/component/floating_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CatView extends StatelessWidget {
+class CatView extends StatefulWidget {
   const CatView({super.key});
 
   @override
+  State<CatView> createState() => _CatViewState();
+}
+
+class _CatViewState extends State<CatView> {
+  @override
   Widget build(BuildContext context) {
+    print("catview");
     return BaseView(
       viewModel: CatViewModel(catService: context.read()),
       builder: (context, viewModel) {
@@ -30,7 +36,7 @@ class CatView extends StatelessWidget {
                 ),
                 Expanded(
                   child: FutureBuilder<List<Cat>?>(
-                    future: viewModel.catItems, // FutureBuilder에 사용할 Future 설정
+                    future: viewModel.catItems,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(

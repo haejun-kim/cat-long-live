@@ -10,7 +10,14 @@ import 'package:image_picker/image_picker.dart';
 /// TODO: 추후 Service, ViewModel로 분리할 것
 /// 현재는 서비스로 분리하면 정상 동작을 확인하기 쉽지 않아서 일을 두번해야함.
 class ImageUpload extends StatefulWidget {
-  const ImageUpload({super.key});
+  const ImageUpload({
+    super.key,
+    this.onSelectedImage,
+    required this.onDeleteImage,
+  });
+
+  final Function(XFile)? onSelectedImage;
+  final Function() onDeleteImage;
 
   @override
   State<ImageUpload> createState() => _ImageUploadState();
@@ -27,7 +34,8 @@ class _ImageUploadState extends State<ImageUpload> {
         await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
-        _image = XFile(pickedFile.path); //가져온 이미지를 _image에 저장
+        _image = XFile(pickedFile.path);
+        widget.onSelectedImage!(_image!);
       });
     }
   }
@@ -55,6 +63,13 @@ class _ImageUploadState extends State<ImageUpload> {
           );
   }
 
+  void deleteImage() {
+    setState(() {
+      _image = null;
+      widget.onDeleteImage();
+    });
+  }
+
   Widget _buildDeleteButton() {
     return Positioned(
       left: 92,
@@ -62,11 +77,7 @@ class _ImageUploadState extends State<ImageUpload> {
           ? Button(
               icon: "material-delete",
               size: ButtonSize.small,
-              onPressed: () {
-                setState(() {
-                  _image = null;
-                });
-              },
+              onPressed: deleteImage,
             )
           : const SizedBox(),
     );
