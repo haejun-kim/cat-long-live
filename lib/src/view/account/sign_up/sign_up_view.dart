@@ -112,13 +112,15 @@ class _SignUpViewState extends State<SignUpView> {
                             viewModel.body,
                           );
 
-                          await Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SignInView(),
-                            ),
-                            (route) => false,
-                          );
+                          if (context.mounted) {
+                            await Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SignInView(),
+                              ),
+                                  (route) => false,
+                            );
+                          }
                         } catch (e) {
                           ToastUtils.showToast("올바르지 않은 형식이거나 중복된 이메일입니다.");
                         } finally {

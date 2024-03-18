@@ -2,7 +2,6 @@ import 'package:cat_long_live/src/service/cat_service.dart';
 import 'package:cat_long_live/src/service/theme_service.dart';
 import 'package:cat_long_live/src/view/base_view.dart';
 import 'package:cat_long_live/src/view/cat/cats/cat_view_model.dart';
-import 'package:cat_long_live/src/view/cat/create_update_cat/create_update_cat_view_model.dart';
 import 'package:cat_long_live/theme/component/image_upload.dart';
 import 'package:cat_long_live/src/view/cat/create_update_cat/widget/select_gender.dart';
 import 'package:cat_long_live/src/view/home/home_view.dart';
@@ -129,7 +128,7 @@ class _CreateAndUpdateCatViewState extends State<CreateAndUpdateCatView> {
                         Button(
                           text: "확인",
                           onPressed: () async {
-                            if (viewModel.nameController != "" &&
+                            if (viewModel.nameController.text.isNotEmpty &&
                                 viewModel.selectedGender != "") {
                               await viewModel.createCat();
 

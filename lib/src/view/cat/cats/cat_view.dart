@@ -19,7 +19,6 @@ class CatView extends StatefulWidget {
 class _CatViewState extends State<CatView> {
   @override
   Widget build(BuildContext context) {
-    print("catview");
     return BaseView(
       viewModel: CatViewModel(catService: context.read()),
       builder: (context, viewModel) {

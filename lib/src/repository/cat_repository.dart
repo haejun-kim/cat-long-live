@@ -1,7 +1,5 @@
 import 'package:cat_long_live/src/model/cat.dart';
 import 'package:cat_long_live/src/service/pocketbase_service.dart';
-import 'package:cat_long_live/utils/type_casting.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 class CatRepository {
@@ -35,15 +33,10 @@ class CatRepository {
           body: body,
           files: [imageFile],
         );
-
-        print('Cat record created successfully with image');
-
       } else {
         await pb.collection('cats').create(
               body: body,
             );
-
-        print('Cat record created successfully without image');
       }
     } catch (e) {
       print('Error creating cat record: $e');
