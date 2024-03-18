@@ -74,9 +74,16 @@ class DiaryCreateView extends StatelessWidget {
                     style: context.typo.headline1
                         .copyWith(fontWeight: context.typo.bold),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    child: ImageUpload(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: ImageUpload(
+                      onSelectedImage: (image) {
+                        // viewModel.selectedImage = image;
+                      },
+                      onDeleteImage: () {
+                        // viewModel.selectedImage = null;
+                      },
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,

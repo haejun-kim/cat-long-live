@@ -1,4 +1,3 @@
-import 'package:cat_long_live/src/model/cat.dart';
 import 'package:cat_long_live/src/service/cat_service.dart';
 import 'package:cat_long_live/src/view/base_view_model.dart';
 
@@ -15,5 +14,5 @@ class HealthViewModel extends BaseViewModel {
     super.dispose();
   }
 
-  List<Cat> get catImageList => catService.catImages;
+  get catItems => catService.catItems;
 }

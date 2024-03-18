@@ -1,4 +1,5 @@
 import 'package:cat_long_live/src/repository/account_repository.dart';
+import 'package:cat_long_live/src/repository/cat_repository.dart';
 import 'package:cat_long_live/src/repository/health_repository.dart';
 import 'package:cat_long_live/src/service/cat_service.dart';
 import 'package:cat_long_live/src/service/health_service.dart';
@@ -20,6 +21,7 @@ void main() async {
       providers: [
         Provider(create: (context) => HealthRepository()),
         Provider(create: (context) => AccountRepository()),
+        Provider(create: (context) => CatRepository()),
         ChangeNotifierProvider(
           create: (context) => ThemeService(),
         ),
@@ -27,7 +29,8 @@ void main() async {
           create: (context) => PocketBaseService(),
         ),
         ChangeNotifierProvider(
-          create: (context) => CatService(),
+          create: (context) =>
+              CatService(catRepository: context.read<CatRepository>()),
         ),
         ChangeNotifierProvider(
           create: (context) => HealthinessService(

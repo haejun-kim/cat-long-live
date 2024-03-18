@@ -3,9 +3,14 @@ import 'package:cat_long_live/theme/component/button/button.dart';
 import 'package:flutter/material.dart';
 
 class DatePicker extends StatefulWidget {
-  const DatePicker({super.key, this.type});
+  const DatePicker({
+    super.key,
+    this.type,
+    this.onBirthdaySelected,
+  });
 
   final ButtonType? type;
+  final Function(DateTime)? onBirthdaySelected;
 
   @override
   State<DatePicker> createState() => _DatePickerState();
@@ -50,6 +55,7 @@ class _DatePickerState extends State<DatePicker> {
           setState(() {
             date = selectedDate;
           });
+          widget.onBirthdaySelected!(selectedDate);
         }
       },
       text:

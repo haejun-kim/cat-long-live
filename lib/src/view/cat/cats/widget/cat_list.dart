@@ -1,6 +1,7 @@
 import 'package:cat_long_live/src/model/cat.dart';
 import 'package:cat_long_live/src/service/theme_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class CatListView extends StatelessWidget {
   const CatListView({super.key, required this.cat});
@@ -20,17 +21,34 @@ class CatListView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(
-            cat.imageUrl,
-            width: double.infinity,
-            height: 250,
-            fit: BoxFit.cover,
-          ),
+          cat.catImage != ""
+              ? Image.network(
+                  "${dotenv.env["POCKETBASE_URL"]}"
+                      "${dotenv.env["IMAGE_DOWNLOAD_URL"]}${cat.id}/"
+                      "${cat.catImage}?thumb="
+                      "${dotenv.env["IMAGE_THUMBNAIL"]}",
+                  width: double.infinity,
+                  height: 250,
+                  fit: BoxFit.cover,
+                )
+
+              /// 등록한 이미지가 없을 때
+              : Image.asset(
+                  "assets/images/null_cat.jpeg",
+                  width: double.infinity,
+                  height: 250,
+                  fit: BoxFit.cover,
+                ),
           const SizedBox(height: 8),
-          Text("냥이1", style: context.typo.headline2),
-          Text("D + 2000", style: context.typo.headline6),
+          Text(cat.name, style: context.typo.headline2),
+          Text(_calculateDaysSinceBirthday(cat.birthday),
+              style: context.typo.headline6),
         ],
       ),
     );
+  }
+
+  String _calculateDaysSinceBirthday(DateTime birthday) {
+    return "D + ${DateTime.now().difference(birthday).inDays + 1}";
   }
 }

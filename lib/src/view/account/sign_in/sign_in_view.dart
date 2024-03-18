@@ -117,15 +117,16 @@ class _SignInViewState extends State<SignInView> {
                               await viewModel.accountRepository
                                   .signIn(viewModel.body);
 
-                              await Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const HomePageView(),
-                                ),
-                                    (route) => false,
-                              );
+                              if (context.mounted) {
+                                await Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const HomePageView(),
+                                  ),
+                                      (route) => false,
+                                );
+                              }
                             } catch (e) {
-                              print(e);
                               await ToastUtils.showToast("등록되지 않은 사용자입니다.");
                             } finally {
                               setState(() {

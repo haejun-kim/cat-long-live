@@ -2,6 +2,8 @@ import 'package:cat_long_live/src/service/pocketbase_service.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 class AccountRepository {
+  final String userId = "";
+
   Future<RecordModel> createAccount(Map<String, dynamic> body) async {
     final record = await pb.collection('users').create(body: body);
     return record;
@@ -16,7 +18,6 @@ class AccountRepository {
           body["email"],
           body["password"],
         );
-    print(authData);
     return authData;
   }
 }
