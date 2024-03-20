@@ -69,8 +69,9 @@ class CatRepository {
       print('Error creating cat record: $e');
     }
   }
+
+  Future<void> deleteCat(String recordId) async {
+    await pb.collection('cats').delete(recordId);
+  }
 }
 
-Future<void> deleteCat(String recordId, Map<String, dynamic> body) async {
-  await pb.collection('cats').delete(recordId);
-}

@@ -68,4 +68,9 @@ class CatService with ChangeNotifier {
 
     notifyListeners();
   }
+
+  Future<void> deleteCat(String recordId) async {
+    await catRepository.deleteCat(recordId);
+    notifyListeners();
+  }
 }

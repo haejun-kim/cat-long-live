@@ -51,18 +51,35 @@ class _CatViewState extends State<CatView> {
                           itemBuilder: (context, index) {
                             final cat = snapshot.data![index];
                             return GestureDetector(
-                                onTap: () async {
-                                  await Navigator.push(context,
-                                      MaterialPageRoute(
-                                    builder: (context) {
-                                      return CreateAndUpdateCatView(
-                                        cat: cat,
-                                        title: "수정",
-                                      );
-                                    },
-                                  ));
+                              onTap: () async {
+                                await Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return CreateAndUpdateCatView(
+                                      cat: cat,
+                                      title: "수정",
+                                    );
+                                  },
+                                ));
+                              },
+                              child: Dismissible(
+                                key: Key(cat.id),
+                                onDismissed: (direction) {
+                                  setState(() {
+                                    viewModel.deleteCat(cat.id);
+                                  });
+
+                                  // Then show a snackbar.
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(
+                                              '${cat.name} dismissed')));
                                 },
-                                child: CatListView(cat: cat));
+
+                                // Show a red background as the item is swiped away.
+                                background: Container(color: Colors.red),
+                                child: CatListView(cat: cat),
+                              ),
+                            );
                           },
                         );
                       }
@@ -76,7 +93,9 @@ class _CatViewState extends State<CatView> {
             onPressed: () async {
               await Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
-                  return const CreateAndUpdateCatView(title: "등록",);
+                  return const CreateAndUpdateCatView(
+                    title: "등록",
+                  );
                 },
               ));
             },

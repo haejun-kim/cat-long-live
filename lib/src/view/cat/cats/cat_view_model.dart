@@ -76,4 +76,8 @@ class CatViewModel extends BaseViewModel {
       image,
     );
   }
+
+  Future<void> deleteCat(String recordId) async {
+    await catService.deleteCat(recordId);
+  }
 }
