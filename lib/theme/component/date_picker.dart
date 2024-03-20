@@ -6,10 +6,12 @@ class DatePicker extends StatefulWidget {
   const DatePicker({
     super.key,
     this.type,
+    this.initialDate,
     this.onBirthdaySelected,
   });
 
   final ButtonType? type;
+  final DateTime? initialDate; // 새로 추가된 initialDate 속성
   final Function(DateTime)? onBirthdaySelected;
 
   @override
@@ -18,6 +20,14 @@ class DatePicker extends StatefulWidget {
 
 class _DatePickerState extends State<DatePicker> {
   DateTime date = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialDate != null) {
+      date = widget.initialDate!;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

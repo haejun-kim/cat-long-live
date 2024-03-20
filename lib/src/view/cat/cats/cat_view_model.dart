@@ -51,4 +51,33 @@ class CatViewModel extends BaseViewModel {
       image,
     );
   }
+
+  Future<void> updateCat(String recordId) async {
+    String name = nameController.text;
+    String breed = breedController.text;
+    double weight = double.parse(weightController.text);
+    String gender = selectedGender;
+    DateTime birthday = selectedBirthday;
+    XFile? image = selectedImage;
+
+    if (gender == "남") {
+      gender = "male";
+    } else {
+      gender = "female";
+    }
+
+    await catService.updateCat(
+      recordId,
+      name,
+      breed,
+      weight,
+      gender,
+      birthday,
+      image,
+    );
+  }
+
+  Future<void> deleteCat(String recordId) async {
+    await catService.deleteCat(recordId);
+  }
 }

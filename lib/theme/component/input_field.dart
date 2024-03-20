@@ -9,6 +9,7 @@ class InputField extends StatefulWidget {
     this.hint,
     this.icon,
     this.minLine,
+    this.initValue,
     this.controller,
     this.validator,
     this.onChanged,
@@ -35,6 +36,7 @@ class InputField extends StatefulWidget {
   final bool isClear;
   final String? labelText;
   final double? horizontalPaddingSize;
+  final String? initValue;
   final TextEditingController? controller; // 입력
   final String? Function(String? field)? validator;
   final void Function(String text)? onChanged; // 입력을 할 때마다 호출

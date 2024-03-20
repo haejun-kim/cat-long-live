@@ -40,4 +40,37 @@ class CatService with ChangeNotifier {
 
     notifyListeners();
   }
+
+
+  Future<void> updateCat(
+      String recordId,
+      String name,
+      String breed,
+      double weight,
+      String gender,
+      DateTime birthday,
+      XFile? image,
+      ) async {
+    String? imagePath = image?.path;
+
+    Map<String, dynamic> catData = {
+      "id": recordId,
+      "userId": pb.authStore.model.id,
+      "name": name,
+      "birthday": birthday.toString(),
+      "gender": gender,
+      "breed": breed,
+      "weight": weight,
+      "image": imagePath,
+    };
+
+    await catRepository.updateCat(recordId, catData, imagePath);
+
+    notifyListeners();
+  }
+
+  Future<void> deleteCat(String recordId) async {
+    await catRepository.deleteCat(recordId);
+    notifyListeners();
+  }
 }
