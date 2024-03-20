@@ -50,7 +50,19 @@ class _CatViewState extends State<CatView> {
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
                             final cat = snapshot.data![index];
-                            return CatListView(cat: cat);
+                            return GestureDetector(
+                                onTap: () async {
+                                  await Navigator.push(context,
+                                      MaterialPageRoute(
+                                    builder: (context) {
+                                      return CreateAndUpdateCatView(
+                                        cat: cat,
+                                        title: "수정",
+                                      );
+                                    },
+                                  ));
+                                },
+                                child: CatListView(cat: cat));
                           },
                         );
                       }
@@ -62,9 +74,9 @@ class _CatViewState extends State<CatView> {
           ),
           floatingActionButton: CustomFloatingActionButton(
             onPressed: () async {
-              Navigator.push(context, MaterialPageRoute(
+              await Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
-                  return const CreateAndUpdateCatView();
+                  return const CreateAndUpdateCatView(title: "등록",);
                 },
               ));
             },

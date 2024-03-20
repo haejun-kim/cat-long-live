@@ -43,11 +43,34 @@ class CatRepository {
     }
   }
 
-  Future<void> updateCat(String recordId, Map<String, dynamic> body) async {
-    await pb.collection('cats').update(recordId, body: body);
-  }
+  Future<void> updateCat(
+      String recordId, Map<String, dynamic> body, String? imagePath) async {
+    try {
+      /// 변경하고자 하는 이미지가 있을 경우
+      if (imagePath != null) {
+        http.MultipartFile imageFile = await http.MultipartFile.fromPath(
+          "catImage",
+          imagePath,
+        );
 
-  Future<void> deleteCat(String recordId, Map<String, dynamic> body) async {
-    await pb.collection('cats').delete(recordId);
+        await pb.collection('cats').update(
+          recordId,
+          body: body,
+          files: [imageFile],
+        );
+        /// 이미지 변경 없이 다른 데이터만 변경할 경우
+      } else {
+        await pb.collection('cats').update(
+              recordId,
+              body: body,
+            );
+      }
+    } catch (e) {
+      print('Error creating cat record: $e');
+    }
   }
+}
+
+Future<void> deleteCat(String recordId, Map<String, dynamic> body) async {
+  await pb.collection('cats').delete(recordId);
 }

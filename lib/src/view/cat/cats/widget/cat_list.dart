@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cat_long_live/src/model/cat.dart';
 import 'package:cat_long_live/src/service/theme_service.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +23,8 @@ class CatListView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           cat.catImage != ""
-              ? Image.network(
-                  "${dotenv.env["POCKETBASE_URL"]}"
+              ? CachedNetworkImage(
+                  imageUrl: "${dotenv.env["POCKETBASE_URL"]}"
                       "${dotenv.env["IMAGE_DOWNLOAD_URL"]}${cat.id}/"
                       "${cat.catImage}?thumb="
                       "${dotenv.env["IMAGE_THUMBNAIL"]}",

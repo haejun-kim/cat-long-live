@@ -1,10 +1,13 @@
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cat_long_live/src/model/cat.dart';
 import 'package:cat_long_live/src/service/theme_service.dart';
 import 'package:cat_long_live/theme/component/asset_icon.dart';
 import 'package:cat_long_live/theme/component/button/button.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:image_picker/image_picker.dart';
 
 /// TODO: 추후 Service, ViewModel로 분리할 것
@@ -12,10 +15,12 @@ import 'package:image_picker/image_picker.dart';
 class ImageUpload extends StatefulWidget {
   const ImageUpload({
     super.key,
+    this.cat,
     this.onSelectedImage,
     required this.onDeleteImage,
   });
 
+  final Cat? cat;
   final Function(XFile)? onSelectedImage;
   final Function() onDeleteImage;
 
@@ -24,8 +29,18 @@ class ImageUpload extends StatefulWidget {
 }
 
 class _ImageUploadState extends State<ImageUpload> {
+  bool initStateRunning = false;
   XFile? _image; //이미지를 담을 변수 선언
   final ImagePicker picker = ImagePicker(); //ImagePicker 초기화
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.cat?.catImage != null && widget.cat?.catImage != "") {
+      _image = XFile(widget.cat!.catImage!);
+      initStateRunning = true;
+    }
+  }
 
   //이미지를 가져오는 함수
   Future getImage() async {
@@ -63,6 +78,21 @@ class _ImageUploadState extends State<ImageUpload> {
           );
   }
 
+  SizedBox _buildCachedNetworkImage() {
+    initStateRunning = false;
+    return SizedBox(
+      height: 120,
+      width: 120,
+      child: CachedNetworkImage(
+        imageUrl: "${dotenv.env["POCKETBASE_URL"]}"
+            "${dotenv.env["IMAGE_DOWNLOAD_URL"]}${widget.cat!.id}/"
+            "${_image!.path}?thumb="
+            "${dotenv.env["IMAGE_THUMBNAIL"]}",
+        fit: BoxFit.fill,
+      ),
+    );
+  }
+
   void deleteImage() {
     setState(() {
       _image = null;
@@ -98,7 +128,9 @@ class _ImageUploadState extends State<ImageUpload> {
             dashPattern: const [8, 4],
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              child: _buildPhotoArea(),
+              child: initStateRunning == false
+                  ? _buildPhotoArea()
+                  : _buildCachedNetworkImage(),
             ),
           ),
           _buildDeleteButton(),
